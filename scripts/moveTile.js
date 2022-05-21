@@ -4,5 +4,5 @@ export const moveTile = ({
   y = 0,
   r = 0
 }) => {
-  tileEl.style.transform = `translate(${x * 100}%, ${y * 100}%) rotate(${r * 90}deg)`;
+  tileEl.querySelector('.tile-handle').style.transform = `translate(${x * 100}%, ${y * 100}%) rotate(${r * 90}deg)`;
 }

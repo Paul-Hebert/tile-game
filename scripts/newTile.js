@@ -1,9 +1,9 @@
 export const newTile = ({gridEl}) => {
   const tile = document.createElement('div');
-  const tileContent = document.createElement('div');
-  tileContent.classList.add('tile-content');
-  tile.classList.add('tile');
-  tile.append(tileContent);
+  tile.classList.add('tile-wrapper');
+  tile.innerHTML = /* html */`
+    <div class="tile-handle"><div class="tile-content"></div></div>
+  `;
   gridEl.append(tile);
   return tile;
 }
