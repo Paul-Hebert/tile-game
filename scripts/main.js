@@ -65,6 +65,7 @@ function listenForCommands() {
           tile.position.r++;
           moveTile(tile);
           break;
+        case " ":
         case "Enter":
           if (canPlaceTile()) {
             placeTile();
