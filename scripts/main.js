@@ -8,6 +8,7 @@ let tilePosition = {
   r: 0
 }
 const gridEl = document.querySelector('.grid');
+const gridSize = 10;
 const gridData = [];
 for(let i = 0; i < 10; i++) {
   gridData[i] = [];
@@ -33,18 +34,30 @@ function listenForCommands() {
     switch (event.key) {
       case "ArrowDown":
         tilePosition.y++;
+        if(tilePosition.y >= gridSize) {
+          tilePosition.y = 0;
+        }
         moveTile({tileEl, ...tilePosition});
         break;
       case "ArrowUp":
         tilePosition.y--;
+        if(tilePosition.y < 0) {
+          tilePosition.y = gridSize - 1;
+        }
         moveTile({tileEl, ...tilePosition});
         break;
       case "ArrowLeft":
         tilePosition.x--;
+        if(tilePosition.x < 0) {
+          tilePosition.x = gridSize - 1;
+        }
         moveTile({tileEl, ...tilePosition});
         break;
       case "ArrowRight":
         tilePosition.x++;
+        if(tilePosition.x >= gridSize) {
+          tilePosition.x = 0;
+        }
         moveTile({tileEl, ...tilePosition});
         break;
       case "Meta":
