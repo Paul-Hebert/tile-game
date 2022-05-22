@@ -1,5 +1,7 @@
 import { newTile } from "./newTile.js";
 import { moveTile } from "./moveTile.js";
+import { placeTile, canPlaceTile, placeStartTile } from "./placeTile.js";
+import { setup } from "./setup.js";
 
 let tile;
 const gridEl = document.querySelector(".grid");
@@ -11,19 +13,13 @@ for (let i = 0; i < gridSize; i++) {
     gridData[i].push(null);
   }
 }
-console.table(gridData);
 
 startRound();
 listenForCommands();
 
 function startRound() {
+  setup({ gridEl, gridData, gridSize });
   tile = newTile({ gridEl });
-  tile.position.x = 4;
-  tile.position.y = 4;
-  moveTile(tile);
-  placeTile();
-
-  // tile = newTile({ gridEl });
 }
 
 function listenForCommands() {
@@ -35,6 +31,7 @@ function listenForCommands() {
       }
 
       switch (event.key) {
+        case "s":
         case "ArrowDown":
           tile.position.y++;
           if (tile.position.y >= gridSize) {
@@ -42,6 +39,7 @@ function listenForCommands() {
           }
           moveTile(tile);
           break;
+        case "w":
         case "ArrowUp":
           tile.position.y--;
           if (tile.position.y < 0) {
@@ -49,6 +47,7 @@ function listenForCommands() {
           }
           moveTile(tile);
           break;
+        case "a":
         case "ArrowLeft":
           tile.position.x--;
           if (tile.position.x < 0) {
@@ -56,6 +55,7 @@ function listenForCommands() {
           }
           moveTile(tile);
           break;
+        case "d":
         case "ArrowRight":
           tile.position.x++;
           if (tile.position.x >= gridSize) {
@@ -63,19 +63,25 @@ function listenForCommands() {
           }
           moveTile(tile);
           break;
+        case "q":
         case "Meta":
           tile.position.r--;
           moveTile(tile);
           break;
+        case "e":
         case "Alt":
           tile.position.r++;
           moveTile(tile);
           break;
         case " ":
         case "Enter":
-          if (canPlaceTile()) {
-            placeTile();
+          if (canPlaceTile({ gridData, tile })) {
+            placeTile({ gridData, tile });
+            tile = newTile({ gridEl });
           }
+          break;
+        case "Escape":
+          startRound();
           break;
         default:
           return;
@@ -86,21 +92,4 @@ function listenForCommands() {
     },
     true
   );
-}
-
-function canPlaceTile() {
-  if (gridData[tile.position.y][tile.position.x] === null) {
-    return true;
-  }
-  tile.el.classList.add("invalid-placement");
-  setTimeout(() => {
-    tile.el.classList.remove("invalid-placement");
-  }, 500);
-  return false;
-}
-
-function placeTile() {
-  gridData[tile.position.y][tile.position.x] = tile;
-  tile.el.classList.add("is-placed");
-  tile = newTile({ gridEl });
 }
