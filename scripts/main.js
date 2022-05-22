@@ -3,11 +3,11 @@ import { moveTile } from "./moveTile.js";
 
 let tile;
 const gridEl = document.querySelector(".grid");
-const gridSize = 10;
+const gridSize = 9;
 const gridData = [];
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < gridSize; i++) {
   gridData[i] = [];
-  for (let j = 0; j < 10; j++) {
+  for (let j = 0; j < gridSize; j++) {
     gridData[i].push(null);
   }
 }
@@ -18,6 +18,12 @@ listenForCommands();
 
 function startRound() {
   tile = newTile({ gridEl });
+  tile.position.x = 4;
+  tile.position.y = 4;
+  moveTile(tile);
+  placeTile();
+
+  // tile = newTile({ gridEl });
 }
 
 function listenForCommands() {
@@ -94,7 +100,7 @@ function canPlaceTile() {
 }
 
 function placeTile() {
-  gridData[tile.position.y][tile.position.x] = tile.el;
+  gridData[tile.position.y][tile.position.x] = tile;
   tile.el.classList.add("is-placed");
   tile = newTile({ gridEl });
 }
