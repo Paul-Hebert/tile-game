@@ -1,6 +1,6 @@
 import { newTile } from "./newTile.js";
 import { moveTile } from "./moveTile.js";
-import { placeTile, canPlaceTile, placeStartTile } from "./placeTile.js";
+import { placeTile, canPlaceTile } from "./placeTile.js";
 import { setup } from "./setup.js";
 
 let tile;

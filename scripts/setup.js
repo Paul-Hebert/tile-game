@@ -8,7 +8,7 @@ export function setup({ gridEl, gridData, gridSize }) {
   placeStartTile({ gridEl, gridData });
 }
 
-function clearGrid({ gridEl, gridData, gridSize }) {
+function clearGrid({ gridEl, gridData }) {
   gridEl.innerHTML = "";
 
   gridData.forEach((row, i) => {
