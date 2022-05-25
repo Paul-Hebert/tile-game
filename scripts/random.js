@@ -25,4 +25,8 @@ function randomItemInArray(array) {
   return array[Math.floor(Math.random() * array.length)];
 }
 
+function randomInt(min, max) {
+  return Math.round(random(min, max));
+}
+
 export { random, randomBool, randomInt, randomItemInArray };

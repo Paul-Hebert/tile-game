@@ -1,0 +1,6 @@
+.river {
+  stroke: hsla(192, 100%, 57%, 1);
+  stroke-width: 20;
+  stroke-linecap: square;
+  fill: none;
+}
